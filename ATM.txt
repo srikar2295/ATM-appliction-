@@ -1,0 +1,42 @@
+import sys
+class ATM:
+    '''Customer class Bank Opertions'''
+    bankname = 'National Bank'
+
+    def __init__(self,name,balance = 0.0):
+        self.name = name
+        self.balance = balance
+
+    def deposit(self,amount):
+        self.balance += amount
+        print("The balance after deposit is:",self.balance)
+    def withdraw(self,amount):
+        if amount > self.balance:
+            print("insufficient Funds, cannot perform this operation")
+            sys.exit()
+        self.balance -= amount
+        print("The balance after withdraw is: ", self.balance)
+
+print("Welcome to ",ATM.bankname)
+name = input("please enter your name")
+c = ATM(name)
+while True:
+    print(' d-Deposit \n w-Withdraw \n e.Exit')
+    option = input ('Choose the opertion: ').lower()
+    if option == 'd':
+        amount = float(input("Enter the amount you would like to deposit: "))
+
+        c.deposit(amount)
+    elif option =='w':
+        while True:
+            amount = float(input("Enter the amount you would like to withdraw: "))
+            if amount == 0 or amount%100 != 0:
+                print("Should be a multiple of 100 Like: \n 100, \t 200, \t 300, \t 400")
+            else:
+                break
+        c.withdraw(amount)
+    elif option =='e':
+        print("Thank you for banking with us")
+        sys.exit()
+    else:
+        print("invalid option, Please enter the valid option")
